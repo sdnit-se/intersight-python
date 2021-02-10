@@ -17,7 +17,7 @@ import re  # noqa: F401
 import six
 
 from intersight.api_client import ApiClient
-from intersight.exceptions import (ApiTypeError, ApiValueError)
+from intersight.exceptions import ApiTypeError, ApiValueError
 
 
 class CondApi(object):
@@ -26,6 +26,7 @@ class CondApi(object):
 
     Do not edit the class manually.
     """
+
     def __init__(self, api_client=None):
         if api_client is None:
             api_client = ApiClient()
@@ -52,12 +53,10 @@ class CondApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
-        return self.get_cond_alarm_by_moid_with_http_info(
-            moid, **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        return self.get_cond_alarm_by_moid_with_http_info(moid, **kwargs)  # noqa: E501
 
-    def get_cond_alarm_by_moid_with_http_info(self, moid,
-                                              **kwargs):  # noqa: E501
+    def get_cond_alarm_by_moid_with_http_info(self, moid, **kwargs):  # noqa: E501
         """Read a 'cond.Alarm' resource.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -83,22 +82,25 @@ class CondApi(object):
 
         local_var_params = locals()
 
-        all_params = ['moid']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = ["moid"]  # noqa: E501
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in six.iteritems(local_var_params["kwargs"]):
             if key not in all_params:
-                raise ApiTypeError("Got an unexpected keyword argument '%s'"
-                                   " to method get_cond_alarm_by_moid" % key)
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_cond_alarm_by_moid" % key
+                )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'moid' is set
         if self.api_client.client_side_validation and (
-                'moid' not in local_var_params or  # noqa: E501
-                local_var_params['moid'] is None):  # noqa: E501
+            "moid" not in local_var_params
+            or local_var_params["moid"] is None  # noqa: E501
+        ):  # noqa: E501
             raise ApiValueError(
                 "Missing the required parameter `moid` when calling `get_cond_alarm_by_moid`"
             )  # noqa: E501
@@ -106,8 +108,8 @@ class CondApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'moid' in local_var_params:
-            path_params['Moid'] = local_var_params['moid']  # noqa: E501
+        if "moid" in local_var_params:
+            path_params["Moid"] = local_var_params["moid"]  # noqa: E501
 
         query_params = []
 
@@ -118,31 +120,36 @@ class CondApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept([
-            'application/json', 'text/csv',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            [
+                "application/json",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth', 'oAuth2']  # noqa: E501
+        auth_settings = ["cookieAuth", "oAuth2"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/cond/Alarms/{Moid}',
-            'GET',
+            "/cond/Alarms/{Moid}",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CondAlarm',  # noqa: E501
+            response_type="CondAlarm",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
+            async_req=local_var_params.get("async_req"),
             _return_http_data_only=local_var_params.get(
-                '_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
     def get_cond_alarm_list(self, **kwargs):  # noqa: E501
         """Read a 'cond.Alarm' resource.  # noqa: E501
@@ -153,16 +160,16 @@ class CondApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). 
+        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
         :param str orderby: Determines what properties are used to sort the collection of resources.
         :param int top: Specifies the maximum number of resources to return in the response.
         :param int skip: Specifies the number of resources to skip in the response.
         :param str select: Specifies a subset of properties to return.
         :param str expand: Specify additional attributes or related resources to return in addition to the primary resources.
-        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. 
+        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
         :param bool count: The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
         :param str inlinecount: The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
-        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. 
+        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -174,7 +181,7 @@ class CondApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_cond_alarm_list_with_http_info(**kwargs)  # noqa: E501
 
     def get_cond_alarm_list_with_http_info(self, **kwargs):  # noqa: E501
@@ -186,16 +193,16 @@ class CondApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). 
+        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
         :param str orderby: Determines what properties are used to sort the collection of resources.
         :param int top: Specifies the maximum number of resources to return in the response.
         :param int skip: Specifies the number of resources to skip in the response.
         :param str select: Specifies a subset of properties to return.
         :param str expand: Specify additional attributes or related resources to return in addition to the primary resources.
-        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. 
+        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
         :param bool count: The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
         :param str inlinecount: The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
-        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. 
+        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -213,66 +220,79 @@ class CondApi(object):
         local_var_params = locals()
 
         all_params = [
-            'filter', 'orderby', 'top', 'skip', 'select', 'expand', 'apply',
-            'count', 'inlinecount', 'at'
+            "filter",
+            "orderby",
+            "top",
+            "skip",
+            "select",
+            "expand",
+            "apply",
+            "count",
+            "inlinecount",
+            "at",
         ]  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in six.iteritems(local_var_params["kwargs"]):
             if key not in all_params:
-                raise ApiTypeError("Got an unexpected keyword argument '%s'"
-                                   " to method get_cond_alarm_list" % key)
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_cond_alarm_list" % key
+                )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
 
         collection_formats = {}
 
         path_params = {}
 
         query_params = []
-        if 'filter' in local_var_params and local_var_params[
-                'filter'] is not None:  # noqa: E501
+        if (
+            "filter" in local_var_params and local_var_params["filter"] is not None
+        ):  # noqa: E501
+            query_params.append(("$filter", local_var_params["filter"]))  # noqa: E501
+        if (
+            "orderby" in local_var_params and local_var_params["orderby"] is not None
+        ):  # noqa: E501
+            query_params.append(("$orderby", local_var_params["orderby"]))  # noqa: E501
+        if (
+            "top" in local_var_params and local_var_params["top"] is not None
+        ):  # noqa: E501
+            query_params.append(("$top", local_var_params["top"]))  # noqa: E501
+        if (
+            "skip" in local_var_params and local_var_params["skip"] is not None
+        ):  # noqa: E501
+            query_params.append(("$skip", local_var_params["skip"]))  # noqa: E501
+        if (
+            "select" in local_var_params and local_var_params["select"] is not None
+        ):  # noqa: E501
+            query_params.append(("$select", local_var_params["select"]))  # noqa: E501
+        if (
+            "expand" in local_var_params and local_var_params["expand"] is not None
+        ):  # noqa: E501
+            query_params.append(("$expand", local_var_params["expand"]))  # noqa: E501
+        if (
+            "apply" in local_var_params and local_var_params["apply"] is not None
+        ):  # noqa: E501
+            query_params.append(("$apply", local_var_params["apply"]))  # noqa: E501
+        if (
+            "count" in local_var_params and local_var_params["count"] is not None
+        ):  # noqa: E501
+            query_params.append(("$count", local_var_params["count"]))  # noqa: E501
+        if (
+            "inlinecount" in local_var_params
+            and local_var_params["inlinecount"] is not None
+        ):  # noqa: E501
             query_params.append(
-                ('$filter', local_var_params['filter']))  # noqa: E501
-        if 'orderby' in local_var_params and local_var_params[
-                'orderby'] is not None:  # noqa: E501
-            query_params.append(
-                ('$orderby', local_var_params['orderby']))  # noqa: E501
-        if 'top' in local_var_params and local_var_params[
-                'top'] is not None:  # noqa: E501
-            query_params.append(
-                ('$top', local_var_params['top']))  # noqa: E501
-        if 'skip' in local_var_params and local_var_params[
-                'skip'] is not None:  # noqa: E501
-            query_params.append(
-                ('$skip', local_var_params['skip']))  # noqa: E501
-        if 'select' in local_var_params and local_var_params[
-                'select'] is not None:  # noqa: E501
-            query_params.append(
-                ('$select', local_var_params['select']))  # noqa: E501
-        if 'expand' in local_var_params and local_var_params[
-                'expand'] is not None:  # noqa: E501
-            query_params.append(
-                ('$expand', local_var_params['expand']))  # noqa: E501
-        if 'apply' in local_var_params and local_var_params[
-                'apply'] is not None:  # noqa: E501
-            query_params.append(
-                ('$apply', local_var_params['apply']))  # noqa: E501
-        if 'count' in local_var_params and local_var_params[
-                'count'] is not None:  # noqa: E501
-            query_params.append(
-                ('$count', local_var_params['count']))  # noqa: E501
-        if 'inlinecount' in local_var_params and local_var_params[
-                'inlinecount'] is not None:  # noqa: E501
-            query_params.append(
-                ('$inlinecount',
-                 local_var_params['inlinecount']))  # noqa: E501
-        if 'at' in local_var_params and local_var_params[
-                'at'] is not None:  # noqa: E501
-            query_params.append(('at', local_var_params['at']))  # noqa: E501
+                ("$inlinecount", local_var_params["inlinecount"])
+            )  # noqa: E501
+        if (
+            "at" in local_var_params and local_var_params["at"] is not None
+        ):  # noqa: E501
+            query_params.append(("at", local_var_params["at"]))  # noqa: E501
 
         header_params = {}
 
@@ -281,31 +301,36 @@ class CondApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept([
-            'application/json', 'text/csv',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            [
+                "application/json",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth', 'oAuth2']  # noqa: E501
+        auth_settings = ["cookieAuth", "oAuth2"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/cond/Alarms',
-            'GET',
+            "/cond/Alarms",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CondAlarmList',  # noqa: E501
+            response_type="CondAlarmList",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
+            # async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get(
-                '_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
     def get_cond_hcl_status_by_moid(self, moid, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatus' resource.  # noqa: E501
@@ -328,12 +353,12 @@ class CondApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_cond_hcl_status_by_moid_with_http_info(
-            moid, **kwargs)  # noqa: E501
+            moid, **kwargs
+        )  # noqa: E501
 
-    def get_cond_hcl_status_by_moid_with_http_info(self, moid,
-                                                   **kwargs):  # noqa: E501
+    def get_cond_hcl_status_by_moid_with_http_info(self, moid, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatus' resource.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -359,23 +384,25 @@ class CondApi(object):
 
         local_var_params = locals()
 
-        all_params = ['moid']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = ["moid"]  # noqa: E501
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in six.iteritems(local_var_params["kwargs"]):
             if key not in all_params:
-                raise ApiTypeError("Got an unexpected keyword argument '%s'"
-                                   " to method get_cond_hcl_status_by_moid" %
-                                   key)
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_cond_hcl_status_by_moid" % key
+                )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'moid' is set
         if self.api_client.client_side_validation and (
-                'moid' not in local_var_params or  # noqa: E501
-                local_var_params['moid'] is None):  # noqa: E501
+            "moid" not in local_var_params
+            or local_var_params["moid"] is None  # noqa: E501
+        ):  # noqa: E501
             raise ApiValueError(
                 "Missing the required parameter `moid` when calling `get_cond_hcl_status_by_moid`"
             )  # noqa: E501
@@ -383,8 +410,8 @@ class CondApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'moid' in local_var_params:
-            path_params['Moid'] = local_var_params['moid']  # noqa: E501
+        if "moid" in local_var_params:
+            path_params["Moid"] = local_var_params["moid"]  # noqa: E501
 
         query_params = []
 
@@ -395,31 +422,36 @@ class CondApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept([
-            'application/json', 'text/csv',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            [
+                "application/json",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth', 'oAuth2']  # noqa: E501
+        auth_settings = ["cookieAuth", "oAuth2"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/cond/HclStatuses/{Moid}',
-            'GET',
+            "/cond/HclStatuses/{Moid}",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CondHclStatus',  # noqa: E501
+            response_type="CondHclStatus",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
+            async_req=local_var_params.get("async_req"),
             _return_http_data_only=local_var_params.get(
-                '_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
     def get_cond_hcl_status_detail_by_moid(self, moid, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatusDetail' resource.  # noqa: E501
@@ -442,12 +474,14 @@ class CondApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_cond_hcl_status_detail_by_moid_with_http_info(
-            moid, **kwargs)  # noqa: E501
+            moid, **kwargs
+        )  # noqa: E501
 
     def get_cond_hcl_status_detail_by_moid_with_http_info(
-            self, moid, **kwargs):  # noqa: E501
+        self, moid, **kwargs
+    ):  # noqa: E501
         """Read a 'cond.HclStatusDetail' resource.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -473,23 +507,25 @@ class CondApi(object):
 
         local_var_params = locals()
 
-        all_params = ['moid']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = ["moid"]  # noqa: E501
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in six.iteritems(local_var_params["kwargs"]):
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_cond_hcl_status_detail_by_moid" % key)
+                    " to method get_cond_hcl_status_detail_by_moid" % key
+                )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'moid' is set
         if self.api_client.client_side_validation and (
-                'moid' not in local_var_params or  # noqa: E501
-                local_var_params['moid'] is None):  # noqa: E501
+            "moid" not in local_var_params
+            or local_var_params["moid"] is None  # noqa: E501
+        ):  # noqa: E501
             raise ApiValueError(
                 "Missing the required parameter `moid` when calling `get_cond_hcl_status_detail_by_moid`"
             )  # noqa: E501
@@ -497,8 +533,8 @@ class CondApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'moid' in local_var_params:
-            path_params['Moid'] = local_var_params['moid']  # noqa: E501
+        if "moid" in local_var_params:
+            path_params["Moid"] = local_var_params["moid"]  # noqa: E501
 
         query_params = []
 
@@ -509,31 +545,36 @@ class CondApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept([
-            'application/json', 'text/csv',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            [
+                "application/json",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth', 'oAuth2']  # noqa: E501
+        auth_settings = ["cookieAuth", "oAuth2"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/cond/HclStatusDetails/{Moid}',
-            'GET',
+            "/cond/HclStatusDetails/{Moid}",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CondHclStatusDetail',  # noqa: E501
+            response_type="CondHclStatusDetail",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
+            async_req=local_var_params.get("async_req"),
             _return_http_data_only=local_var_params.get(
-                '_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
     def get_cond_hcl_status_detail_list(self, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatusDetail' resource.  # noqa: E501
@@ -544,16 +585,16 @@ class CondApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). 
+        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
         :param str orderby: Determines what properties are used to sort the collection of resources.
         :param int top: Specifies the maximum number of resources to return in the response.
         :param int skip: Specifies the number of resources to skip in the response.
         :param str select: Specifies a subset of properties to return.
         :param str expand: Specify additional attributes or related resources to return in addition to the primary resources.
-        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. 
+        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
         :param bool count: The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
         :param str inlinecount: The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
-        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. 
+        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -565,12 +606,12 @@ class CondApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_cond_hcl_status_detail_list_with_http_info(
-            **kwargs)  # noqa: E501
+            **kwargs
+        )  # noqa: E501
 
-    def get_cond_hcl_status_detail_list_with_http_info(self,
-                                                       **kwargs):  # noqa: E501
+    def get_cond_hcl_status_detail_list_with_http_info(self, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatusDetail' resource.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -579,16 +620,16 @@ class CondApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). 
+        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
         :param str orderby: Determines what properties are used to sort the collection of resources.
         :param int top: Specifies the maximum number of resources to return in the response.
         :param int skip: Specifies the number of resources to skip in the response.
         :param str select: Specifies a subset of properties to return.
         :param str expand: Specify additional attributes or related resources to return in addition to the primary resources.
-        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. 
+        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
         :param bool count: The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
         :param str inlinecount: The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
-        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. 
+        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -606,67 +647,79 @@ class CondApi(object):
         local_var_params = locals()
 
         all_params = [
-            'filter', 'orderby', 'top', 'skip', 'select', 'expand', 'apply',
-            'count', 'inlinecount', 'at'
+            "filter",
+            "orderby",
+            "top",
+            "skip",
+            "select",
+            "expand",
+            "apply",
+            "count",
+            "inlinecount",
+            "at",
         ]  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in six.iteritems(local_var_params["kwargs"]):
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_cond_hcl_status_detail_list" % key)
+                    " to method get_cond_hcl_status_detail_list" % key
+                )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
 
         collection_formats = {}
 
         path_params = {}
 
         query_params = []
-        if 'filter' in local_var_params and local_var_params[
-                'filter'] is not None:  # noqa: E501
+        if (
+            "filter" in local_var_params and local_var_params["filter"] is not None
+        ):  # noqa: E501
+            query_params.append(("$filter", local_var_params["filter"]))  # noqa: E501
+        if (
+            "orderby" in local_var_params and local_var_params["orderby"] is not None
+        ):  # noqa: E501
+            query_params.append(("$orderby", local_var_params["orderby"]))  # noqa: E501
+        if (
+            "top" in local_var_params and local_var_params["top"] is not None
+        ):  # noqa: E501
+            query_params.append(("$top", local_var_params["top"]))  # noqa: E501
+        if (
+            "skip" in local_var_params and local_var_params["skip"] is not None
+        ):  # noqa: E501
+            query_params.append(("$skip", local_var_params["skip"]))  # noqa: E501
+        if (
+            "select" in local_var_params and local_var_params["select"] is not None
+        ):  # noqa: E501
+            query_params.append(("$select", local_var_params["select"]))  # noqa: E501
+        if (
+            "expand" in local_var_params and local_var_params["expand"] is not None
+        ):  # noqa: E501
+            query_params.append(("$expand", local_var_params["expand"]))  # noqa: E501
+        if (
+            "apply" in local_var_params and local_var_params["apply"] is not None
+        ):  # noqa: E501
+            query_params.append(("$apply", local_var_params["apply"]))  # noqa: E501
+        if (
+            "count" in local_var_params and local_var_params["count"] is not None
+        ):  # noqa: E501
+            query_params.append(("$count", local_var_params["count"]))  # noqa: E501
+        if (
+            "inlinecount" in local_var_params
+            and local_var_params["inlinecount"] is not None
+        ):  # noqa: E501
             query_params.append(
-                ('$filter', local_var_params['filter']))  # noqa: E501
-        if 'orderby' in local_var_params and local_var_params[
-                'orderby'] is not None:  # noqa: E501
-            query_params.append(
-                ('$orderby', local_var_params['orderby']))  # noqa: E501
-        if 'top' in local_var_params and local_var_params[
-                'top'] is not None:  # noqa: E501
-            query_params.append(
-                ('$top', local_var_params['top']))  # noqa: E501
-        if 'skip' in local_var_params and local_var_params[
-                'skip'] is not None:  # noqa: E501
-            query_params.append(
-                ('$skip', local_var_params['skip']))  # noqa: E501
-        if 'select' in local_var_params and local_var_params[
-                'select'] is not None:  # noqa: E501
-            query_params.append(
-                ('$select', local_var_params['select']))  # noqa: E501
-        if 'expand' in local_var_params and local_var_params[
-                'expand'] is not None:  # noqa: E501
-            query_params.append(
-                ('$expand', local_var_params['expand']))  # noqa: E501
-        if 'apply' in local_var_params and local_var_params[
-                'apply'] is not None:  # noqa: E501
-            query_params.append(
-                ('$apply', local_var_params['apply']))  # noqa: E501
-        if 'count' in local_var_params and local_var_params[
-                'count'] is not None:  # noqa: E501
-            query_params.append(
-                ('$count', local_var_params['count']))  # noqa: E501
-        if 'inlinecount' in local_var_params and local_var_params[
-                'inlinecount'] is not None:  # noqa: E501
-            query_params.append(
-                ('$inlinecount',
-                 local_var_params['inlinecount']))  # noqa: E501
-        if 'at' in local_var_params and local_var_params[
-                'at'] is not None:  # noqa: E501
-            query_params.append(('at', local_var_params['at']))  # noqa: E501
+                ("$inlinecount", local_var_params["inlinecount"])
+            )  # noqa: E501
+        if (
+            "at" in local_var_params and local_var_params["at"] is not None
+        ):  # noqa: E501
+            query_params.append(("at", local_var_params["at"]))  # noqa: E501
 
         header_params = {}
 
@@ -675,31 +728,36 @@ class CondApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept([
-            'application/json', 'text/csv',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            [
+                "application/json",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth', 'oAuth2']  # noqa: E501
+        auth_settings = ["cookieAuth", "oAuth2"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/cond/HclStatusDetails',
-            'GET',
+            "/cond/HclStatusDetails",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CondHclStatusDetailList',  # noqa: E501
+            response_type="CondHclStatusDetailList",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
+            async_req=local_var_params.get("async_req"),
             _return_http_data_only=local_var_params.get(
-                '_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
     def get_cond_hcl_status_job_by_moid(self, moid, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatusJob' resource.  # noqa: E501
@@ -722,12 +780,14 @@ class CondApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
+        kwargs["_return_http_data_only"] = True
         return self.get_cond_hcl_status_job_by_moid_with_http_info(
-            moid, **kwargs)  # noqa: E501
+            moid, **kwargs
+        )  # noqa: E501
 
-    def get_cond_hcl_status_job_by_moid_with_http_info(self, moid,
-                                                       **kwargs):  # noqa: E501
+    def get_cond_hcl_status_job_by_moid_with_http_info(
+        self, moid, **kwargs
+    ):  # noqa: E501
         """Read a 'cond.HclStatusJob' resource.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -753,23 +813,25 @@ class CondApi(object):
 
         local_var_params = locals()
 
-        all_params = ['moid']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params = ["moid"]  # noqa: E501
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in six.iteritems(local_var_params["kwargs"]):
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_cond_hcl_status_job_by_moid" % key)
+                    " to method get_cond_hcl_status_job_by_moid" % key
+                )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
         # verify the required parameter 'moid' is set
         if self.api_client.client_side_validation and (
-                'moid' not in local_var_params or  # noqa: E501
-                local_var_params['moid'] is None):  # noqa: E501
+            "moid" not in local_var_params
+            or local_var_params["moid"] is None  # noqa: E501
+        ):  # noqa: E501
             raise ApiValueError(
                 "Missing the required parameter `moid` when calling `get_cond_hcl_status_job_by_moid`"
             )  # noqa: E501
@@ -777,8 +839,8 @@ class CondApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'moid' in local_var_params:
-            path_params['Moid'] = local_var_params['moid']  # noqa: E501
+        if "moid" in local_var_params:
+            path_params["Moid"] = local_var_params["moid"]  # noqa: E501
 
         query_params = []
 
@@ -789,31 +851,36 @@ class CondApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept([
-            'application/json', 'text/csv',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            [
+                "application/json",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth', 'oAuth2']  # noqa: E501
+        auth_settings = ["cookieAuth", "oAuth2"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/cond/HclStatusJobs/{Moid}',
-            'GET',
+            "/cond/HclStatusJobs/{Moid}",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CondHclStatusJob',  # noqa: E501
+            response_type="CondHclStatusJob",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
+            async_req=local_var_params.get("async_req"),
             _return_http_data_only=local_var_params.get(
-                '_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
     def get_cond_hcl_status_job_list(self, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatusJob' resource.  # noqa: E501
@@ -824,16 +891,16 @@ class CondApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). 
+        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
         :param str orderby: Determines what properties are used to sort the collection of resources.
         :param int top: Specifies the maximum number of resources to return in the response.
         :param int skip: Specifies the number of resources to skip in the response.
         :param str select: Specifies a subset of properties to return.
         :param str expand: Specify additional attributes or related resources to return in addition to the primary resources.
-        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. 
+        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
         :param bool count: The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
         :param str inlinecount: The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
-        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. 
+        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -845,12 +912,10 @@ class CondApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
-        return self.get_cond_hcl_status_job_list_with_http_info(
-            **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        return self.get_cond_hcl_status_job_list_with_http_info(**kwargs)  # noqa: E501
 
-    def get_cond_hcl_status_job_list_with_http_info(self,
-                                                    **kwargs):  # noqa: E501
+    def get_cond_hcl_status_job_list_with_http_info(self, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatusJob' resource.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -859,16 +924,16 @@ class CondApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). 
+        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
         :param str orderby: Determines what properties are used to sort the collection of resources.
         :param int top: Specifies the maximum number of resources to return in the response.
         :param int skip: Specifies the number of resources to skip in the response.
         :param str select: Specifies a subset of properties to return.
         :param str expand: Specify additional attributes or related resources to return in addition to the primary resources.
-        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. 
+        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
         :param bool count: The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
         :param str inlinecount: The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
-        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. 
+        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -886,67 +951,79 @@ class CondApi(object):
         local_var_params = locals()
 
         all_params = [
-            'filter', 'orderby', 'top', 'skip', 'select', 'expand', 'apply',
-            'count', 'inlinecount', 'at'
+            "filter",
+            "orderby",
+            "top",
+            "skip",
+            "select",
+            "expand",
+            "apply",
+            "count",
+            "inlinecount",
+            "at",
         ]  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in six.iteritems(local_var_params["kwargs"]):
             if key not in all_params:
-                raise ApiTypeError("Got an unexpected keyword argument '%s'"
-                                   " to method get_cond_hcl_status_job_list" %
-                                   key)
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_cond_hcl_status_job_list" % key
+                )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
 
         collection_formats = {}
 
         path_params = {}
 
         query_params = []
-        if 'filter' in local_var_params and local_var_params[
-                'filter'] is not None:  # noqa: E501
+        if (
+            "filter" in local_var_params and local_var_params["filter"] is not None
+        ):  # noqa: E501
+            query_params.append(("$filter", local_var_params["filter"]))  # noqa: E501
+        if (
+            "orderby" in local_var_params and local_var_params["orderby"] is not None
+        ):  # noqa: E501
+            query_params.append(("$orderby", local_var_params["orderby"]))  # noqa: E501
+        if (
+            "top" in local_var_params and local_var_params["top"] is not None
+        ):  # noqa: E501
+            query_params.append(("$top", local_var_params["top"]))  # noqa: E501
+        if (
+            "skip" in local_var_params and local_var_params["skip"] is not None
+        ):  # noqa: E501
+            query_params.append(("$skip", local_var_params["skip"]))  # noqa: E501
+        if (
+            "select" in local_var_params and local_var_params["select"] is not None
+        ):  # noqa: E501
+            query_params.append(("$select", local_var_params["select"]))  # noqa: E501
+        if (
+            "expand" in local_var_params and local_var_params["expand"] is not None
+        ):  # noqa: E501
+            query_params.append(("$expand", local_var_params["expand"]))  # noqa: E501
+        if (
+            "apply" in local_var_params and local_var_params["apply"] is not None
+        ):  # noqa: E501
+            query_params.append(("$apply", local_var_params["apply"]))  # noqa: E501
+        if (
+            "count" in local_var_params and local_var_params["count"] is not None
+        ):  # noqa: E501
+            query_params.append(("$count", local_var_params["count"]))  # noqa: E501
+        if (
+            "inlinecount" in local_var_params
+            and local_var_params["inlinecount"] is not None
+        ):  # noqa: E501
             query_params.append(
-                ('$filter', local_var_params['filter']))  # noqa: E501
-        if 'orderby' in local_var_params and local_var_params[
-                'orderby'] is not None:  # noqa: E501
-            query_params.append(
-                ('$orderby', local_var_params['orderby']))  # noqa: E501
-        if 'top' in local_var_params and local_var_params[
-                'top'] is not None:  # noqa: E501
-            query_params.append(
-                ('$top', local_var_params['top']))  # noqa: E501
-        if 'skip' in local_var_params and local_var_params[
-                'skip'] is not None:  # noqa: E501
-            query_params.append(
-                ('$skip', local_var_params['skip']))  # noqa: E501
-        if 'select' in local_var_params and local_var_params[
-                'select'] is not None:  # noqa: E501
-            query_params.append(
-                ('$select', local_var_params['select']))  # noqa: E501
-        if 'expand' in local_var_params and local_var_params[
-                'expand'] is not None:  # noqa: E501
-            query_params.append(
-                ('$expand', local_var_params['expand']))  # noqa: E501
-        if 'apply' in local_var_params and local_var_params[
-                'apply'] is not None:  # noqa: E501
-            query_params.append(
-                ('$apply', local_var_params['apply']))  # noqa: E501
-        if 'count' in local_var_params and local_var_params[
-                'count'] is not None:  # noqa: E501
-            query_params.append(
-                ('$count', local_var_params['count']))  # noqa: E501
-        if 'inlinecount' in local_var_params and local_var_params[
-                'inlinecount'] is not None:  # noqa: E501
-            query_params.append(
-                ('$inlinecount',
-                 local_var_params['inlinecount']))  # noqa: E501
-        if 'at' in local_var_params and local_var_params[
-                'at'] is not None:  # noqa: E501
-            query_params.append(('at', local_var_params['at']))  # noqa: E501
+                ("$inlinecount", local_var_params["inlinecount"])
+            )  # noqa: E501
+        if (
+            "at" in local_var_params and local_var_params["at"] is not None
+        ):  # noqa: E501
+            query_params.append(("at", local_var_params["at"]))  # noqa: E501
 
         header_params = {}
 
@@ -955,31 +1032,36 @@ class CondApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept([
-            'application/json', 'text/csv',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            [
+                "application/json",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth', 'oAuth2']  # noqa: E501
+        auth_settings = ["cookieAuth", "oAuth2"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/cond/HclStatusJobs',
-            'GET',
+            "/cond/HclStatusJobs",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CondHclStatusJobList',  # noqa: E501
+            response_type="CondHclStatusJobList",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
+            async_req=local_var_params.get("async_req"),
             _return_http_data_only=local_var_params.get(
-                '_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
 
     def get_cond_hcl_status_list(self, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatus' resource.  # noqa: E501
@@ -990,16 +1072,16 @@ class CondApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). 
+        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
         :param str orderby: Determines what properties are used to sort the collection of resources.
         :param int top: Specifies the maximum number of resources to return in the response.
         :param int skip: Specifies the number of resources to skip in the response.
         :param str select: Specifies a subset of properties to return.
         :param str expand: Specify additional attributes or related resources to return in addition to the primary resources.
-        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. 
+        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
         :param bool count: The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
         :param str inlinecount: The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
-        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. 
+        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -1011,9 +1093,8 @@ class CondApi(object):
                  If the method is called asynchronously,
                  returns the request thread.
         """
-        kwargs['_return_http_data_only'] = True
-        return self.get_cond_hcl_status_list_with_http_info(
-            **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        return self.get_cond_hcl_status_list_with_http_info(**kwargs)  # noqa: E501
 
     def get_cond_hcl_status_list_with_http_info(self, **kwargs):  # noqa: E501
         """Read a 'cond.HclStatus' resource.  # noqa: E501
@@ -1024,16 +1105,16 @@ class CondApi(object):
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). 
+        :param str filter: Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
         :param str orderby: Determines what properties are used to sort the collection of resources.
         :param int top: Specifies the maximum number of resources to return in the response.
         :param int skip: Specifies the number of resources to skip in the response.
         :param str select: Specifies a subset of properties to return.
         :param str expand: Specify additional attributes or related resources to return in addition to the primary resources.
-        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. 
+        :param str apply: Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
         :param bool count: The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
         :param str inlinecount: The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
-        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. 
+        :param str at: Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -1051,66 +1132,79 @@ class CondApi(object):
         local_var_params = locals()
 
         all_params = [
-            'filter', 'orderby', 'top', 'skip', 'select', 'expand', 'apply',
-            'count', 'inlinecount', 'at'
+            "filter",
+            "orderby",
+            "top",
+            "skip",
+            "select",
+            "expand",
+            "apply",
+            "count",
+            "inlinecount",
+            "at",
         ]  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
+        all_params.append("async_req")
+        all_params.append("_return_http_data_only")
+        all_params.append("_preload_content")
+        all_params.append("_request_timeout")
 
-        for key, val in six.iteritems(local_var_params['kwargs']):
+        for key, val in six.iteritems(local_var_params["kwargs"]):
             if key not in all_params:
-                raise ApiTypeError("Got an unexpected keyword argument '%s'"
-                                   " to method get_cond_hcl_status_list" % key)
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_cond_hcl_status_list" % key
+                )
             local_var_params[key] = val
-        del local_var_params['kwargs']
+        del local_var_params["kwargs"]
 
         collection_formats = {}
 
         path_params = {}
 
         query_params = []
-        if 'filter' in local_var_params and local_var_params[
-                'filter'] is not None:  # noqa: E501
+        if (
+            "filter" in local_var_params and local_var_params["filter"] is not None
+        ):  # noqa: E501
+            query_params.append(("$filter", local_var_params["filter"]))  # noqa: E501
+        if (
+            "orderby" in local_var_params and local_var_params["orderby"] is not None
+        ):  # noqa: E501
+            query_params.append(("$orderby", local_var_params["orderby"]))  # noqa: E501
+        if (
+            "top" in local_var_params and local_var_params["top"] is not None
+        ):  # noqa: E501
+            query_params.append(("$top", local_var_params["top"]))  # noqa: E501
+        if (
+            "skip" in local_var_params and local_var_params["skip"] is not None
+        ):  # noqa: E501
+            query_params.append(("$skip", local_var_params["skip"]))  # noqa: E501
+        if (
+            "select" in local_var_params and local_var_params["select"] is not None
+        ):  # noqa: E501
+            query_params.append(("$select", local_var_params["select"]))  # noqa: E501
+        if (
+            "expand" in local_var_params and local_var_params["expand"] is not None
+        ):  # noqa: E501
+            query_params.append(("$expand", local_var_params["expand"]))  # noqa: E501
+        if (
+            "apply" in local_var_params and local_var_params["apply"] is not None
+        ):  # noqa: E501
+            query_params.append(("$apply", local_var_params["apply"]))  # noqa: E501
+        if (
+            "count" in local_var_params and local_var_params["count"] is not None
+        ):  # noqa: E501
+            query_params.append(("$count", local_var_params["count"]))  # noqa: E501
+        if (
+            "inlinecount" in local_var_params
+            and local_var_params["inlinecount"] is not None
+        ):  # noqa: E501
             query_params.append(
-                ('$filter', local_var_params['filter']))  # noqa: E501
-        if 'orderby' in local_var_params and local_var_params[
-                'orderby'] is not None:  # noqa: E501
-            query_params.append(
-                ('$orderby', local_var_params['orderby']))  # noqa: E501
-        if 'top' in local_var_params and local_var_params[
-                'top'] is not None:  # noqa: E501
-            query_params.append(
-                ('$top', local_var_params['top']))  # noqa: E501
-        if 'skip' in local_var_params and local_var_params[
-                'skip'] is not None:  # noqa: E501
-            query_params.append(
-                ('$skip', local_var_params['skip']))  # noqa: E501
-        if 'select' in local_var_params and local_var_params[
-                'select'] is not None:  # noqa: E501
-            query_params.append(
-                ('$select', local_var_params['select']))  # noqa: E501
-        if 'expand' in local_var_params and local_var_params[
-                'expand'] is not None:  # noqa: E501
-            query_params.append(
-                ('$expand', local_var_params['expand']))  # noqa: E501
-        if 'apply' in local_var_params and local_var_params[
-                'apply'] is not None:  # noqa: E501
-            query_params.append(
-                ('$apply', local_var_params['apply']))  # noqa: E501
-        if 'count' in local_var_params and local_var_params[
-                'count'] is not None:  # noqa: E501
-            query_params.append(
-                ('$count', local_var_params['count']))  # noqa: E501
-        if 'inlinecount' in local_var_params and local_var_params[
-                'inlinecount'] is not None:  # noqa: E501
-            query_params.append(
-                ('$inlinecount',
-                 local_var_params['inlinecount']))  # noqa: E501
-        if 'at' in local_var_params and local_var_params[
-                'at'] is not None:  # noqa: E501
-            query_params.append(('at', local_var_params['at']))  # noqa: E501
+                ("$inlinecount", local_var_params["inlinecount"])
+            )  # noqa: E501
+        if (
+            "at" in local_var_params and local_var_params["at"] is not None
+        ):  # noqa: E501
+            query_params.append(("at", local_var_params["at"]))  # noqa: E501
 
         header_params = {}
 
@@ -1119,28 +1213,33 @@ class CondApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept([
-            'application/json', 'text/csv',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        ])  # noqa: E501
+        header_params["Accept"] = self.api_client.select_header_accept(
+            [
+                "application/json",
+                "text/csv",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ]
+        )  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['cookieAuth', 'oAuth2']  # noqa: E501
+        auth_settings = ["cookieAuth", "oAuth2"]  # noqa: E501
 
         return self.api_client.call_api(
-            '/cond/HclStatuses',
-            'GET',
+            "/cond/HclStatuses",
+            "GET",
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='CondHclStatusList',  # noqa: E501
+            response_type="CondHclStatusList",  # noqa: E501
             auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
+            async_req=local_var_params.get("async_req"),
             _return_http_data_only=local_var_params.get(
-                '_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
+                "_return_http_data_only"
+            ),  # noqa: E501
+            _preload_content=local_var_params.get("_preload_content", True),
+            _request_timeout=local_var_params.get("_request_timeout"),
+            collection_formats=collection_formats,
+        )
