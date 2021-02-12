@@ -326,8 +326,7 @@ class LsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type="LsServiceProfileList",  # noqa: E501
-            # auth_settings=auth_settings,
-            async_req=local_var_params.get("async_req"),
+            auth_settings=auth_settings,
             _return_http_data_only=local_var_params.get(
                 "_return_http_data_only"
             ),  # noqa: E501

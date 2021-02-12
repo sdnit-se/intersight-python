@@ -323,7 +323,6 @@ class CondApi(object):
             files=local_var_files,
             response_type="CondAlarmList",  # noqa: E501
             auth_settings=auth_settings,
-            # async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get(
                 "_return_http_data_only"
             ),  # noqa: E501
